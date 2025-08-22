@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Belieber — Rapid Fan Page</title>
+    <meta name="description"
+        content="Rapid prototype of a Justin Bieber fan page using only vanilla HTML, CSS, and JavaScript." />
+    <style>
+        :root {
+            --bg: #0b0c10;
+            --elev: #11131a;
+            --card: #0e1016;
+            --text: #ecf1f8;
+            --muted: #9aa4b2;
+            --brand: #ff3d71;
+            --brand2: #6c5ce7;
+            --ring: rgba(255, 61, 113, .35);
+            --shadow: 0 10px 24px rgba(0, 0, 0, .35), 0 4px 12px rgba(0, 0, 0, .25);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.55
+        }
+
+        img {
+            max-width: 100%;
+            display: block
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: saturate(140%) blur(8px);
+            background: linear-gradient(180deg, rgba(0, 0, 0, .4), rgba(0, 0, 0, 0));
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: .8rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .75rem
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            font-weight: 800
+        }
+
+        .logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--brand), var(--brand2));
+            box-shadow: var(--shadow)
+        }
+
+        .links {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap
+        }
+
+        .links a {
+            padding: .5rem .7rem;
+            border-radius: 10px;
+            font-weight: 600;
+            opacity: .9
+        }
+
+        .links a:hover {
+            background: rgba(255, 255, 255, .08)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .9rem;
+            border-radius: 12px;
+            font-weight: 700;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, var(--brand), var(--brand2));
+            color: #fff;
+            box-shadow: var(--shadow)
+        }
+
+        .ghost {
+            background: transparent;
+            border-color: rgba(255, 255, 255, .15);
+            color: var(--text)
+        }
+
+        .hero {
+            position: relative;
+            min-height: 68vh;
+            display: grid;
+            align-items: end;
+            isolation: isolate
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .35) 40%, rgba(0, 0, 0, 0)), var(--hero-bg) center/cover no-repeat
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 1rem 3rem
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: .8rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: .9
+        }
+
+        .title {
+            font-size: clamp(2.1rem, 5vw, 3.6rem);
+            line-height: 1.05;
+            margin: .5rem 0 1rem;
+            font-weight: 900
+        }
+
+        .sub {
+            max-width: 60ch;
+            opacity: .92;
+            font-size: clamp(1rem, 2.2vw, 1.15rem)
+        }
+
+        .cta {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin-top: 1rem
+        }
+
+        section {
+            padding: 3rem 1rem
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .section-title {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            margin: 0 0 .4rem
+        }
+
+        .section-sub {
+            color: var(--muted);
+            margin: 0 0 1.2rem
+        }
+
+        /* Simple player */
+        .player {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 1rem;
+            border-radius: 18px;
+            box-shadow: var(--shadow)
+        }
+
+        .cover {
+            width: 80px;
+            height: 80px;
+            border-radius: 14px;
+            object-fit: cover
+        }
+
+        .progress {
+            height: 6px;
+            background: rgba(255, 255, 255, .15);
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--brand2))
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: .45rem
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: transparent;
+            color: var(--text);
+            cursor: pointer
+        }
+
+        .control-btn:hover {
+            border-color: rgba(255, 255, 255, .35)
+        }
+
+        /* Grid cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column
+        }
+
+        .card .body {
+            padding: .9rem;
+            display: flex;
+            flex-direction: column;
+            gap: .25rem
+        }
+
+        .pill {
+            display: inline-block;
+            font-size: .75rem;
+            padding: .22rem .48rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            color: var(--muted)
+        }
+
+        /* Gallery masonry */
+        .masonry {
+            column-count: 1;
+            column-gap: 1rem
+        }
+
+        @media(min-width:640px) {
+            .masonry {
+                column-count: 2
+            }
+        }
+
+        @media(min-width:980px) {
+            .masonry {
+                column-count: 3
+            }
+        }
+
+        .masonry a {
+            display: block;
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: var(--shadow)
+        }
+
+        /* Modal */
+        dialog {
+            border: none;
+            padding: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: var(--elev);
+            color: var(--text);
+            max-width: 720px;
+            width: calc(100% - 2rem)
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(2px)
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .9rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        .modal-body {
+            padding: 1rem
+        }
+
+        footer {
+            padding: 2rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .02), transparent), var(--bg)
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="nav" aria-label="Primary">
+            <a class="brand" href="#top" aria-label="Belieber Home"><span class="logo"
+                    aria-hidden="true"></span><span>Belieber</span></a>
+            <div class="links" role="menubar">
+                <a href="#player" role="menuitem">Listen</a>
+                <a href="#discography" role="menuitem">Discography</a>
+                <a href="#gallery" role="menuitem">Gallery</a>
+                <a href="#join" role="menuitem">Join</a>
+            </div>
+            <button id="themeToggle" class="ghost btn" aria-label="Toggle dark/light">🌙</button>
+        </nav>
+    </header>
+
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero" aria-label="Hero">
+            <div class="hero-inner">
+                <span class="eyebrow">Fan Spotlight</span>
+                <h1 class="title">Justin Bieber — Music, Moments, Beliebers ✨</h1>
+                <p class="sub">A quick, clean prototype built with vanilla HTML, CSS and JavaScript. Drop your local
+                    images into <code>assets/</code> and you're good to go.</p>
+                <div class="cta">
+                    <a class="btn" href="#discography">Explore Albums</a>
+                    <a class="btn ghost" href="#join">Join the Club</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLAYER -->
+        <section id="player" aria-labelledby="playerTitle">
+            <div class="container">
+                <h2 class="section-title" id="playerTitle">Now Playing</h2>
+                <p class="section-sub">Mock player with accessible controls. Replace the MP3 with a local file if
+                    desired.</p>
+                <div class="player" role="group" aria-label="Audio player">
+                    <img id="cover" class="cover" alt="Album cover" />
+                    <div>
+                        <strong id="trackTitle">Demo — "Never Say Prototype"</strong>
+                        <div class="progress" aria-label="Progress">
+                            <div id="bar" class="bar"></div>
+                        </div>
+                        <div id="time" class="muted">0:00 / 0:00</div>
+                    </div>
+                    <div class="controls">
+                        <button class="control-btn" id="back" aria-label="Seek backward 10s">⏪</button>
+                        <button class="control-btn" id="play" aria-label="Play/Pause">▶️</button>
+                        <button class="control-btn" id="fwd" aria-label="Seek forward 10s">⏩</button>
+                    </div>
+                </div>
+                <audio id="audio" preload="metadata"
+                    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            </div>
+        </section>
+
+        <!-- DISCOGRAPHY (mock cards) -->
+        <section id="discography" aria-labelledby="discographyTitle">
+            <div class="container">
+                <h2 class="section-title" id="discographyTitle">Discography (Highlights)</h2>
+                <p class="section-sub">Click a card for a sample track list (all placeholder).</p>
+                <div class="grid" id="albumGrid" role="list"></div>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery" aria-labelledby="galleryTitle">
+            <div class="container">
+                <h2 class="section-title" id="galleryTitle">Gallery</h2>
+                <p class="section-sub">Images loaded from your local <code>assets/</code> folder: justin1.jpg …
+                    justin6.jpg.</p>
+                <div class="masonry" id="masonry"></div>
+            </div>
+        </section>
+
+        <!-- JOIN -->
+        <section id="join" aria-labelledby="joinTitle">
+            <div class="container">
+                <h2 class="section-title" id="joinTitle">Join the Fan Club</h2>
+                <p class="section-sub">Get email updates about drops, tours, and events.</p>
+                <form id="joinForm" class="grid" style="grid-template-columns:1fr 1fr;gap:.75rem;max-width:720px">
+                    <label for="name" class="sr-only">Name</label>
+                    <input class="ghost btn"
+                        style="background:var(--card);color:var(--text);border-color:rgba(255,255,255,.14)" id="name"
+                        name="name" placeholder="Your name" required />
+                    <label for="email" class="sr-only">Email</label>
+                    <input class="ghost btn"
+                        style="background:var(--card);color:var(--text);border-color:rgba(255,255,255,.14)" id="email"
+                        name="email" placeholder="Email address" type="email" required />
+                    <div style="grid-column:1/-1;display:flex;gap:.5rem;align-items:center">
+                        <input type="checkbox" id="terms" required />
+                        <label for="terms">I agree to receive updates and accept the privacy policy.</label>
+                    </div>
+                    <button class="btn" style="grid-column:1/-1;width:max-content">Join Now</button>
+                    <div id="joinMsg" class="muted" style="grid-column:1/-1"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"
+            style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+            <div><strong>Belieber</strong>
+                <div class="muted">Fan-made prototype. Not affiliated with the artist.</div>
+            </div>
+            <div style="display:flex;gap:.6rem">
+                <a href="#" title="Instagram">📸</a>
+                <a href="#" title="X">✖️</a>
+                <a href="#" title="YouTube">▶️</a>
+                <a href="#" title="Spotify">🎵</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for album -->
+    <dialog id="albumModal" aria-labelledby="modalTitle">
+        <div class="modal-head">
+            <strong id="modalTitle">Album</strong>
+            <button class="control-btn" id="modalClose" aria-label="Close">✖️</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </dialog>
+
+    <script>
+        // ======== CONFIG: set your ASSET directory ========
+        // Default expects an ./assets folder next to this HTML file.
+        // If you want to point to your absolute path, you can try:
+        //   window.ASSET_DIR = 'assets/'; // (recommended)
+        //   // or, if opening the HTML directly in the browser:
+        //   // window.ASSET_DIR = 'file:///C:/Users/jclim/OneDrive%20-%20Singapore%20Management%20University/Year%202/Term%201/IS216%20Web%20Application%20Development%20II/code/week1/assets/';
+        const ASSET_DIR = window.ASSET_DIR || 'assets/';
+
+        // ======== THEME ========
+        const themeToggle = document.getElementById('themeToggle');
+        const preferred = localStorage.getItem('theme');
+        if (preferred) document.documentElement.setAttribute('data-theme', preferred);
+        themeToggle.textContent = (document.documentElement.getAttribute('data-theme') === 'light') ? '☀️' : '🌙';
+        themeToggle.addEventListener('click', () => {
+            const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', cur);
+            localStorage.setItem('theme', cur);
+            themeToggle.textContent = cur === 'light' ? '☀️' : '🌙';
+        });
+
+        // ======== HERO BACKGROUND (uses justin1.jpg) ========
+        document.documentElement.style.setProperty('--hero-bg', `url('${ASSET_DIR}justin1.jpg')`);
+
+        // ======== PLAYER ========
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play');
+        const backBtn = document.getElementById('back');
+        const fwdBtn = document.getElementById('fwd');
+        const bar = document.getElementById('bar');
+        const time = document.getElementById('time');
+        const cover = document.getElementById('cover');
+        cover.src = ASSET_DIR + 'justin2.jpg';
+
+        playBtn.addEventListener('click', () => { if (audio.paused) { audio.play(); playBtn.textContent = '⏸️'; } else { audio.pause(); playBtn.textContent = '▶️'; } });
+        backBtn.addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+        fwdBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
+        audio.addEventListener('timeupdate', () => { const pct = (audio.currentTime / (audio.duration || 1)) * 100; bar.style.width = pct + '%'; time.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`; });
+        audio.addEventListener('loadedmetadata', () => { time.textContent = `0:00 / ${fmt(audio.duration)}`; });
+        function fmt(s) { if (!isFinite(s)) return '0:00'; const m = Math.floor(s / 60), ss = Math.floor(s % 60).toString().padStart(2, '0'); return `${m}:${ss}`; }
+
+        // ======== DISCOGRAPHY (mock data) ========
+        const albums = [
+            { title: 'Purpose', year: 2015, cover: 'justin3.jpg', tracks: ['Mark My Words', 'I\'ll Show You', 'What Do You Mean?', 'Sorry', 'Love Yourself'] },
+            { title: 'Changes', year: 2020, cover: 'justin4.jpg', tracks: ['All Around Me', 'Habitual', 'Come Around Me', 'Intentions', 'Yummy'] },
+            { title: 'Justice', year: 2021, cover: 'justin5.jpg', tracks: ['2 Much', 'As I Am', 'Peaches', 'Hold On', 'Ghost'] },
+            { title: 'Believe', year: 2012, cover: 'justin6.jpg', tracks: ['Boyfriend', 'As Long As You Love Me', 'Beauty and a Beat', 'All Around the World'] }
+        ];
+        const grid = document.getElementById('albumGrid');
+        albums.forEach((a, i) => {
+            const el = document.createElement('article');
+            el.className = 'card';
+            el.setAttribute('role', 'listitem');
+            el.innerHTML = `
+        <img src="${ASSET_DIR + a.cover}" alt="${a.title} cover" loading="lazy" />
+        <div class="body">
+          <span class="pill">${a.year}</span>
+          <strong>${a.title}</strong>
+          <span class="muted">${a.tracks.length} tracks</span>
+          <div style="margin-top:.45rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <button class="ghost btn open-album" data-i="${i}">View Tracks</button>
+            <button class="btn play-preview" data-i="${i}">Set as Cover</button>
+          </div>
+        </div>`;
+            grid.appendChild(el);
+        });
+
+        // Modal
+        const modal = document.getElementById('albumModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+        grid.addEventListener('click', (e) => {
+            const openBtn = e.target.closest('.open-album');
+            const setBtn = e.target.closest('.play-preview');
+            if (openBtn) {
+                const i = +openBtn.dataset.i; const a = albums[i];
+                document.getElementById('modalTitle').textContent = `${a.title} • ${a.year}`;
+                modalBody.innerHTML = `
+          <div style="display:flex;gap:.9rem;align-items:center;margin-bottom:.75rem">
+            <img src="${ASSET_DIR + a.cover}" alt="${a.title}" style="width:88px;height:88px;border-radius:14px;object-fit:cover" />
+            <div>
+              <div><strong>${a.title}</strong></div>
+              <div class="muted">${a.year}</div>
+            </div>
+          </div>
+          <ol style="padding-left:1.2rem">${a.tracks.map(t => `<li>${t}</li>`).join('')}</ol>`;
+                if (typeof modal.showModal === 'function') modal.showModal();
+                else alert('Tracks:\n- ' + a.tracks.join('\n- '));
+            }
+            if (setBtn) {
+                const i = +setBtn.dataset.i; const a = albums[i];
+                cover.src = ASSET_DIR + a.cover;
+                document.getElementById('trackTitle').textContent = `${a.title} — Preview`;
+                window.scrollTo({ top: document.getElementById('player').offsetTop - 70, behavior: 'smooth' });
+            }
+        });
+        modalClose.addEventListener('click', () => modal.close());
+
+        // ======== GALLERY (justin1..6) ========
+        const masonry = document.getElementById('masonry');
+        const galleryFiles = [1, 2, 3, 4, 5, 6].map(n => `justin${n}.jpg`);
+        galleryFiles.forEach((f, i) => {
+            const link = document.createElement('a');
+            link.href = ASSET_DIR + f; link.target = '_blank'; link.rel = 'noopener'; link.title = `Photo ${i + 1}`;
+            const img = document.createElement('img');
+            img.src = ASSET_DIR + f; img.alt = `Justin Bieber photo ${i + 1}`; img.loading = 'lazy';
+            link.appendChild(img); masonry.appendChild(link);
+        });
+
+        // ======== FORM (fake submit) ========
+        const form = document.getElementById('joinForm');
+        const joinMsg = document.getElementById('joinMsg');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const name = data.get('name');
+            joinMsg.textContent = `Thanks, ${name}! Check your inbox for a confirmation email (demo).`;
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
+<style>
+    /* Hover animations */
+    .btn:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 6px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .control-btn:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    .links a:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    /* Fade-in animation for sections */
+    section {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s ease forwards;
+    }
+
+    section:nth-of-type(2) {
+        animation-delay: 0.2s;
+    }
+
+    section:nth-of-type(3) {
+        animation-delay: 0.4s;
+    }
+
+    section:nth-of-type(4) {
+        animation-delay: 0.6s;
+    }
+
+    section:nth-of-type(5) {
+        animation-delay: 0.8s;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Smooth hover effect for links */
+    a:hover {
+        color: var(--brand);
+        transition: color 0.3s ease;
+    }
+
+    /* Modal pop-in animation */
+    dialog[open] {
+        animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+        from {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Gallery image hover effect */
+    .masonry a img:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+</style>
