@@ -1,0 +1,26 @@
+.block-demo {
+    background-color: aqua;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 0;
+    margin-right: 0;
+
+    /* Shorthand */
+    margin: 6px 0 6px 0;
+}
+
+.inline-demo {
+    display: inline;
+    background-color: pink;
+    margin: 6px 0;
+    width: 100px;
+    height: 80px;
+}
+
+.inline-block {
+    display: inline-block;
+    background-color: pink;
+    margin: 6px 0;
+    width: 100px;
+    height: 80px;
+}

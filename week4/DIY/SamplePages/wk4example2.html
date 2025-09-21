@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Functions are Objects </title>
+</head>
+
+<body>
+	<script>
+		function Book(type, author) {
+			this.type = type; // remove this and try
+			this.author = author;
+			this.getDetails = function () {
+				return type + " written by " + author;
+			}
+		}
+		var book = new Book("Fiction", "Peter King");
+		alert(book.getDetails());
+		// result: “Fiction written by Peter King”
+		alert(book.type);
+		
+		function bike() {
+			console.log(this.name);
+		}
+
+		var name = "Ninja";
+		var obj1 = { name: "Pulsar", bike: bike };
+		var obj2 = { name: "Gixxer", bike: bike };
+
+		bike();        // what is logged?
+		obj1.bike();   // what is logged?
+		obj2.bike();   // what is logged?
+
+	</script>
+</body>
+
+</html>

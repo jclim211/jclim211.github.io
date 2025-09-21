@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GeoJSON Routes on Google Maps</title>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCiEjwV2a2DZImwIsH1ME52mj5aY_nR7o&callback=initMap&libraries=places">
+        </script>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display:flex;height:100vh;width:100vw;">
+        <div
+            style="width:340px;min-width:260px;max-width:400px;background:#fff;padding:28px 20px 20px 20px;box-shadow:2px 0 8px #0001;z-index:2;display:flex;flex-direction:column;gap:18px;">
+            <h2 style="margin-top:0;font-size:1.2em;">Route Planner</h2>
+            <div style="font-size:1em;">
+                <label for="start-coord"><b>Start Point</b> (lat,lng):</label><br>
+                <input id="start-coord" type="text" placeholder="e.g. 1.3521,103.8198"
+                    style="width:95%;margin-bottom:10px;" />
+            </div>
+            <div style="font-size:1em;">
+                <label for="end-coord"><b>End Point</b> (lat,lng):</label><br>
+                <input id="end-coord" type="text" placeholder="e.g. 1.3000,103.8500"
+                    style="width:95%;margin-bottom:10px;" />
+            </div>
+            <div style="font-size:0.98em;margin-bottom:8px;">
+                <span id="start-info">Start: <i>Not selected</i></span><br>
+                <span id="end-info">End: <i>Not selected</i></span>
+            </div>
+            <button id="plan-btn" style="padding:4px 14px;font-size:1em;margin-bottom:6px;">Plan Route</button>
+            <button id="reset-btn" style="padding:4px 14px;font-size:1em;">Reset</button>
+            <div style="font-size:0.95em;color:#555;margin-top:10px;">
+                <ol style="margin:0 0 0 18px;padding:0;font-size:1em;">
+                    <li>Enter coordinates or click the map to select start/end points.</li>
+                    <li>Click <b>Plan Route</b> to show the shortest route within the Park Connector Loop.</li>
+                    <li>Click <b>Reset</b> to clear selections.</li>
+                </ol>
+            </div>
+        </div>
+        <div id="map" style="flex:1 1 0%;height:100vh;"></div>
+    </div>
+    <script>
+        // Google Places Autocomplete for start/end
+        let startAutocomplete, endAutocomplete;
+        function initAutocomplete() {
+            if (window.google && google.maps && google.maps.places) {
+                startAutocomplete = new google.maps.places.Autocomplete(document.getElementById('start-coord'), { types: ['geocode'] });
+                endAutocomplete = new google.maps.places.Autocomplete(document.getElementById('end-coord'), { types: ['geocode'] });
+                startAutocomplete.addListener('place_changed', function () {
+                    const place = startAutocomplete.getPlace();
+                    if (place.geometry && place.geometry.location) {
+                        const latlng = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+                        window.updateStartInfo(latlng);
+                    }
+                });
+                endAutocomplete.addListener('place_changed', function () {
+                    const place = endAutocomplete.getPlace();
+                    if (place.geometry && place.geometry.location) {
+                        const latlng = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+                        window.updateEndInfo(latlng);
+                    }
+                });
+            }
+        }
+        // UI update helpers for route planner
+        // These are called by try.js when user clicks on the map
+        window.updateStartInfo = function (latlng) {
+            document.getElementById('start-info').innerHTML = latlng ? `Start: <b>${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}</b>` : 'Start: <i>Not selected</i>';
+            document.getElementById('start-coord').value = latlng ? `${latlng.lat.toFixed(5)},${latlng.lng.toFixed(5)}` : '';
+        }
+        window.updateEndInfo = function (latlng) {
+            document.getElementById('end-info').innerHTML = latlng ? `End: <b>${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}</b>` : 'End: <i>Not selected</i>';
+            document.getElementById('end-coord').value = latlng ? `${latlng.lat.toFixed(5)},${latlng.lng.toFixed(5)}` : '';
+        }
+        window.resetRouteUI = function () {
+            window.updateStartInfo(null);
+            window.updateEndInfo(null);
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Wait for Google Maps API to be loaded
+            if (window.google && google.maps && google.maps.places) {
+                initAutocomplete();
+            } else {
+                let check = setInterval(function () {
+                    if (window.google && google.maps && google.maps.places) {
+                        clearInterval(check);
+                        initAutocomplete();
+                    }
+                }, 200);
+            }
+            document.getElementById('reset-btn').onclick = function () {
+                if (window.resetRoutePlanner) window.resetRoutePlanner();
+                window.resetRouteUI();
+            };
+            document.getElementById('plan-btn').onclick = function () {
+                const startVal = document.getElementById('start-coord').value.trim();
+                const endVal = document.getElementById('end-coord').value.trim();
+                function parseCoord(val) {
+                    const m = val.match(/^\s*(-?\d+(?:\.\d+)?)[, ]+(-?\d+(?:\.\d+)?)/);
+                    if (!m) return null;
+                    return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
+                }
+                const start = parseCoord(startVal);
+                const end = parseCoord(endVal);
+                if (!start || !end) {
+                    alert('Please enter valid coordinates for both start and end.');
+                    return;
+                }
+                if (window.planRouteFromUI) window.planRouteFromUI(start, end);
+                window.updateStartInfo(start);
+                window.updateEndInfo(end);
+            };
+            window.resetRouteUI();
+        });
+    </script>
+    <script src="try.js"></script>
+</body>
+
+</html>

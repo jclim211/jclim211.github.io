@@ -1,0 +1,65 @@
+/* DO NOT MODIFY THE BELOW CSS STYLING */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* YOU MAY MODIFY THIS */
+#floor {
+  width: 600px;
+  height: 420px;
+  background-color: aqua;
+  border: 1px solid black;
+  margin: 20px auto;
+}
+
+/* YOU MAY MODIFY THIS */
+.dining-table {
+  background-color: pink;
+  width: 120px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+/* YOU MAY MODIFY THIS */
+.row {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  height: 100px;
+  align-items: center;
+  gap: 40px;
+}
+
+/* YOU MAY MODIFY THIS */
+.buffet-corner {
+  background-color: yellow;
+  width: 300px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+/* YOU MAY MODIFY THIS */
+.cashier-table {
+  background-color: #888;
+  width: 120px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+.cashier-table {
+  background-color: gray;
+}
+
+/* YOU MAY ADD MORE CSS STYLING ANYWHERE IN THIS FILE */
