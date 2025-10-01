@@ -1,0 +1,63 @@
+/*
+  NAME:
+  EMAIL:
+*/
+body {
+    background-color: #ecf0f1;
+    font-size: 18px;
+}
+
+/* Part A */
+header {
+    padding: 5px;
+}
+
+h1 {
+
+}
+
+#featured-review h2 {
+    text-align: center;
+    color: #3498db;
+}
+
+/* Part B */
+.book-review {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+.book-review img {
+    display: block;  
+
+}
+
+#book-author {
+    font-style: italic;
+}
+
+/* Part C */
+
+.rating ul {
+
+}
+
+.rating ul li {
+    padding: 20px 2px;
+}
+
+.rating span {
+    color: #ababab;
+    font-size: 20px;
+    padding: 5px;
+}
+
+/* Part D */
+footer {
+    
+}
+
+footer p {
+    width: fit-content;
+
+}

@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Silverline Station",
+        "available_bikes": 15,
+        "available_docks": 0
+    },
+    {
+        "id": 2,
+        "name": "Greenfield Depot Station",
+        "available_bikes": 4,
+        "available_docks": 11
+    },
+    {
+        "id": 3,
+        "name": "Blue Horizon Station",
+        "available_bikes": 7,
+        "available_docks": 8
+    },
+    {
+        "id": 4,
+        "name": "Maplewood Station",
+        "available_bikes": 10,
+        "available_docks": 5
+    },
+    {
+        "id": 5,
+        "name": "Eastgate Station",
+        "available_bikes": 0,
+        "available_docks": 15
+    }
+]
