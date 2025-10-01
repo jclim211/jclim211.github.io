@@ -1,0 +1,19 @@
+/*
+    Name: LIM Jie Ching
+    Email: jc.lim.2024
+*/
+
+
+/*
+
+Write CSS below to style the button such that the button has extra padding
+(more space between the text and the button borders)
+
+and change the color of the button to pink.
+
+*/
+
+#hello {
+    background-color: pink;
+    padding: 1rem;
+}
