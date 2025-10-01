@@ -1,0 +1,65 @@
+/*
+	NAME:
+	EMAIL:
+*/
+#header {
+	/* part (a) */
+	
+	border-radius: 10px;
+	background-color: #151C55;
+	color: white;
+	padding: 10px 2px; /* 1 m */
+}
+
+
+/* Part (b): Add a selector here so that the first menu item is 150 px from the left
+*/
+
+#header ul {
+	margin-left: 150px;
+}
+
+#header ul li { 
+	font-family: sans-serif;
+	background-color:#708090;
+	/* part (b) */
+	display: inline;
+	padding: 10px 30px;
+	
+}
+
+#header ul li a {
+	text-decoration: none;
+	/* part (b) */
+	color: white;
+}
+
+
+	
+
+#footer {
+	font-size:1em;
+	font-style:italic;
+}
+
+table {
+	/* part (c) */
+	border-collapse: collapse;
+	margin-left: 20px;
+}
+
+/* part (c): Add selectors to style table heading */
+table tr th {
+	padding: 15px 10px;
+	text-align: left;
+}
+
+table tr td { 
+	padding: 10px; 
+}
+
+/* part (c): Add 1 selector here to highlight table row in green (with white text) for events that are free and to do the same for text "free" in footnote */
+.free, span {	/* 0.5 mark */
+	background-color:green; /* 0.25 mark */
+	color: white; /* 0.25 mark */
+}
