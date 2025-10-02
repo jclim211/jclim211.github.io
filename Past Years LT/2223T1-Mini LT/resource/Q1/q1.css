@@ -6,5 +6,18 @@
 .box {
 	width: 300px;
 	height: 180px;
-	border: 2px dotted black;	
+	border: 2px solid red;	
+	margin: 10px;
+	padding: 10px;
+	border-radius: 5%;
+	background-color: beige;
+}
+
+.box p {
+	text-align: center;
+}
+
+.box h4 {
+	text-align: right;
+	font-style: italic;
 }
