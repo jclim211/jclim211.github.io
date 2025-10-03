@@ -1,0 +1,111 @@
+<!-- Do NOT Edit -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Products</title>
+
+   <!-- Bootstrap CSS -->
+   <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous">
+
+   <!-- Axios -->
+   <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+
+</head>
+
+<body>
+
+   <div class="bg-info p-2 mb-3">
+      <select class="form-select" aria-label="Product categories" id="category"
+         onchange="updateProductTable()">
+         <option selected value="">Select a product category</option>
+      </select>
+   </div>
+
+   <!-- None  <576px, sm  ≥576px, md  ≥768px, lg  ≥992px, xl  ≥1200px, xxl  ≥1400px -->
+   <div class='container-fluid'>
+      <div class='row'>
+         <div class='col-7' id="output">
+            Select a product category.
+            <!-- Sample table: start -->
+            <!-- <table class="table table-primary table-striped ">
+               <thead>
+                  <tr>
+                     <th scope="col">name</th>
+                     <th scope="col">price</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Example</th>
+                     <td>4.95</td>
+                  </tr>
+                  ...
+               </tbody>
+            </table> -->
+            <!-- Sample table: end -->
+
+         </div> <!-- output col -->
+
+         <div class='col-5 bg-warning-subtle p-2' id="addDiv">
+            <!-- Sample add form : start -->
+            <div class="input-group mb-3">
+               <span class="input-group-text" id="nameLabel">Name</span>
+               <input type="text" class="form-control" placeholder="Name"
+                  aria-label="Name" aria-describedby="nameLabel" id="nameInput">
+            </div>
+            <div class="input-group mb-3">
+               <span class="input-group-text" id="priceLabel">Price</span>
+               <input type="text" class="form-control" placeholder="4.95"
+                  aria-label="Price" aria-describedby="priceLabel"
+                  id="priceInput">
+            </div>
+
+            <button type="button" class="btn btn-primary" id="btnAdd"
+               onclick="doAdd()">Add</button>
+
+            <!-- Sample add form: end -->
+
+         </div> <!-- col -->
+      </div> <!-- row -->
+   </div> <!-- container -->
+
+   <script src="script.js"></script>
+
+   <hr>
+
+   <div class="bg-body-secondary m-3 p-3">
+      <h2>Test area</h2>
+      <button onclick="__btnResetClick()" class="btn btn-warning">Reset
+         data</button>
+      <div>
+         <span class="text-danger">Important! </span>
+         Best to click "Reset data" before you
+         <button onclick="__runTests()" class="btn btn-primary">Run
+            tests</button>
+      </div>
+
+      <h3>Score: <span id="score">0</span>%; <span id="numPass">0</span> out of <span id="numTests">?</span></h3>
+      <div id="__adminOutput" class="border border-dark m-2 p-2"></div>
+   </div>
+
+   <script src="test.js"></script>
+
+   <script>
+      window.onload = populateCategories;
+   </script>
+   <!-- Bootstrap JS bundle to be placed before the closing </body> tag -->
+   <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"></script>
+
+</body>
+
+</html>

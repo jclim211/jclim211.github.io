@@ -1,0 +1,34 @@
+{
+    "fruits": [
+        {
+            "name": "Pack of 4 apples",
+            "price": 3.95
+        },
+        {
+            "name": "Pack of 3 oranges",
+            "price": 5.15
+        },
+        {
+            "name": "Papaya",
+            "price": "7.1"
+        }
+    ],
+    "drinks": [
+        {
+            "name": "100 Plus",
+            "price": 1.5
+        },
+        {
+            "name": "Coke Zero",
+            "price": 1.8
+        },
+        {
+            "name": "Coke",
+            "price": 1.7
+        },
+        {
+            "name": "Orange Juice",
+            "price": "1.55"
+        }
+    ]
+}

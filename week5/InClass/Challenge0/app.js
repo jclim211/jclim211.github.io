@@ -74,7 +74,7 @@ function populate_category_dropdown() {
     .then((response) => {
       console.log("Axios call completed successfully!");
       let select_category = document.getElementById("category");
-      select_category.innerHTML = ""; // Clear existing options
+      //select_category.innerHTML = ""; // Clear existing options
       let categories_array = response.data.records;
       console.log(categories_array); // Array of category objects
 
@@ -154,7 +154,62 @@ document.getElementById("category").addEventListener("change", function () {
 });
 
 /* Task 9 - Alcoholic Dropdown Event Listener */
+document.getElementById("alcoholic").addEventListener("change", function () {
+  console.log("Alcoholic changed to: " + this.value);
+  // You can add code here to filter the drinks based on the selected category
+  if (this.value == "") {
+    get_all_drinks(); // Show all drinks if "All" is selected
+  } else {
+    console.log(this.value);
+    // Fetch and display drinks of the selected category
+    const api_endpoint_url = `http://is216/DrinksAPI/api/drink/search.php?a=${this.value}`;
+    console.log(api_endpoint_url);
+    axios
+      .get(api_endpoint_url)
+      .then((response) => {
+        let section_results = document.getElementById("results");
+        let result_str = ``;
+        let drinks_array = response.data.records;
+        for (let drink of drinks_array) {
+          drink_name = drink.name;
+          drink_category = drink.category;
+          drink_alcoholic = drink.alcoholic;
+          drink_photo_url = drink.photo_url;
+          result_str += `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/DrinksAPI/${drink_photo_url}" 
+                             class="card-img-top"
+                             alt="${drink_name}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                ${drink_name}
+                            </h5>
+                            <p class="card-text small text-muted mb-0">
+                                ${drink_category} • ${drink_alcoholic}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        section_results.innerHTML = result_str;
+      })
+      .catch((error) => {
+        console.log(error.message);
 
+        // Task 5 - Data can't be loaded, display alert
+        //   "Failed to load drinks data."
+        // YOUR CODE GOES HERE
+        let section_alerts = document.getElementById("alerts");
+        section_alerts.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+                Failed to load drinks data.
+            </div>
+        `;
+      });
+  }
+});
 /* Task 10 - Name search input Event Listener */
 
 // DO NOT MODIFY THE BELOW LINES
