@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Midterm - Oscars</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Axios CDN-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- CSS (Use this section if you need to) -->
+    <style>
+        #header_div {
+            background-color: #9bfdfd;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body onload="display_default()">
+
+    <!-- ================================================================ -->
+    <!-- Header -->
+    <div class="container-fluid" id="header_div">
+        <h1 class="display-5">Oscar Winners</h1>
+    </div>
+
+
+    <!-- ================================================================ -->
+    <!-- Menu -->
+    <div class="container" style="margin-top: 20px; width: 200px">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                List of Decades
+            </a>
+            
+            <!-- Each decade with corresponding num_winners will be displays as a button -->
+            <ul id="decade_list" class="dropdown-menu">
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!-- ================================================================ -->
+    <!-- Oscar Winners as Cards -->
+
+    <div class="container-fluid" style="margin-top: 20px">
+        
+        <div id="winner_cards" class="row row-cols-1 row-cols-sm-3 g-4">
+
+        </div>
+
+    </div>
+    
+
+    <!-- ================================================================ -->
+    <!-- Custom JavaScript -->
+    <script src="oscars.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

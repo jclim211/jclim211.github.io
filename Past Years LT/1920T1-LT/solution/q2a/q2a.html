@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>q2a</title>
+
+    <style>
+        /* add your CSS code here */
+        .redbox {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+        .bluebox {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    </style>
+    
+</head>
+<body>
+
+   <div id="boxes">
+       <!-- Append your colored boxes inside this division -->
+   </div>
+
+	<script>
+
+        var arr = [{prop1: 1}];
+
+        var tmp = Math.ceil(Math.random() * 10); // generate a random value between 0-10
+        var obj = {prop2: tmp};
+        arr.push(obj); 
+        //console.log(arr);
+       
+        // test cases
+        var testcases = [3,5,7,9,11];
+       
+        for (var testcase of testcases) {
+            compare(testcase);
+        }
+       
+
+        function compare(x) {
+            let node = document.createElement("div");
+            let parent = document.getElementById("boxes");
+            console.log("x: " + x);
+            console.log("prop2: " + arr[1].prop2);
+            if(x > arr[1].prop2) {   
+                node.setAttribute("class", "redbox");
+            } else {
+                node.setAttribute("class", "bluebox");
+            }
+            parent.appendChild(node);
+        }
+
+	</script>
+</body>
+</html>

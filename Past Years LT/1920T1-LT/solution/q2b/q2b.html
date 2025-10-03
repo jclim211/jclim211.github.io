@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+            body {
+                background-color: rgb(250, 244, 244);
+            }
+            #hint {
+                margin-left: 50px;
+            }
+      </style>
+      <script>
+          // DO NOT MODIFY THIS ARRAY
+          var colors = ["indianred", "lightcoral", "salmon", "darksalmon", "lightsalmon", 
+                            "crimson", "red", "firebrick", "darkred", "pink", "lightpink", 
+                            "hotpink", "deeppink", "mediumvioletred", "palevioletred", 
+                            "coral", "tomato", "orangered", "darkorange", "orange", 
+                            "gold", "yellow", "lightyellow", "lemonchiffon", "papayawhip", 
+                            "moccasin", "peachpuff", "palegoldenrod", "khaki", "darkhaki",
+                            "lavender", "thistle", "plum", "violet", "orchid", "fuchsia",
+                            "magenta", "blueviolet", "darkviolet", "darkorchid", "darkmagenta",
+                            "purple", "indigo", "slateblue", "darkslateblue", "mediumslateblue",
+                            "greenyellow", "chartreuse", "lawngreen", "lime", "limegreen",
+                            "palegreen", "lightgreen", "springgreen", "seagreen", "forestgreen",
+                            "green", "darkgreen", "yellowgreen", "olivedrab", "olive", 
+                            "darkolivegreen", "darkseagreen", "lightseagreen", "darkcyan",
+                            "teal", "aqua", "cyan", "lightcyan", "paleturquoise", "aquamarine",
+                            "turquoise", "cadetblue", "steelblue", "lightsteelblue", "powderblue",
+                            "lightblue", "skyblue", "lightskyblue", "deepskyblue", "dodgerblue",
+                            "royalblue", "blue", "mediumblue", "darkblue", "navy", "midnightblue",
+                            "cornsilk", "blanchedalmond", "bisque", "navajowhite", "wheat",
+                            "burlywood", "tan", "rosybrown", "sandybrown", "goldenrod", 
+                            "darkgoldenrod", "peru", "chocolate", "saddlebrown", "sienna", 
+                            "brown", "maroon", "white", "snow", "honeydew", "mintcream", "azure",
+                            "aliceblue", "ghostwhite", "whitesmoke", "seashell", "beige", "oldlace",
+                            "ivory", "linen", "mistyrose", "gainsboro", "lightgray", "silver", "darkgray",
+                            "gray", "dimgray", "slategray", "lightslategray", "darkslategray", "black"];
+      </script>
+   </head>
+   <body>
+
+        <p><b>Start typing a color in the input field below:</b></p>
+
+        <label for="color" id="color">Color: </label>
+        <!-- Modify the following HTML code -->
+        <input type="text" id="color" onkeyup="showHint(this.value)"><br>
+        <select id="hint" onchange="changeColor()" size="10">
+            <option value="none">no suggestion</option>
+        </select>
+        
+        
+    <script>
+        // Add code here
+        var hint = document.getElementById("hint");
+
+        function changeColor() {
+            var newColor = hint.value;
+            // console.log(color);
+            document.body.style.backgroundColor = newColor;
+        }
+
+        function showHint(q) {
+            clearOptions();
+            var found = false;
+            // lookup all hints from array if q is not "" 
+            if (q.length != 0 && q.trim() != "") {     
+                console.log(q);
+               
+                q = q.toLowerCase();  
+                var len = q.length;  
+                for (var color of colors) {  
+                    // console.log(color);
+                    if(color.toLowerCase().startsWith(q)) {  
+                        found = true;          
+                        addOption(color);               
+                    }  
+                }  
+            }
+            if (!found)
+                addOption("no suggestion");
+        }
+
+        function addOption(color) {
+            var newOption = document.createElement("option");
+            var textNode = document.createTextNode(color);
+            newOption.appendChild(textNode);
+            newOption.value = color;
+            hint.appendChild(newOption);
+        }
+
+        function clearOptions() {
+            var len = hint.children.length;
+            for (let i=0;i<len;i++) {
+                hint.children[0].remove();
+            }
+        }
+
+      </script>
+ 
+   </body>
+</html>
