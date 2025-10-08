@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Question 1 - TechHire Job Board</title>
+    <link rel="stylesheet" href="q1_readonly.css" />
+    <link rel="stylesheet" href="q1.css" />
+</head>
+<body>
+    
+    <!-- Header -->
+    <div class="header">
+        <img src="img/techhire_logo.png" alt="TechHire Logo" class="logo">
+        <div class="header-text">
+            <h1>TechHire</h1>
+            <p>Your gateway to tech opportunities</p>
+        </div>
+    </div>
+
+
+    <!-- Main -->
+    <div class='main'>
+
+        <!-- Form -->
+        <div class="filter-form">
+            <h2>Filter Jobs</h2>
+            <form>
+                <label for="role">Role:</label>
+                <input type="text" id="role" placeholder="e.g. Frontend Developer" required>
+
+                <label for="location">Location:</label>
+                <select id="location">
+                    <option value="">All</option>
+                    <option value="remote">Remote</option>
+                    <option value="onsite">On-site</option>
+                </select>
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </div>
+
+        <!-- Job Listings -->
+        <div class="job-listings">
+            <h2>Open Positions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="new-post">
+                        <td>
+                            Frontend Developer
+                            <span class="badge">New!</span>
+                        </td>
+                        <td class="has-tooltip">
+                            PixelCraft
+                            <span class="tooltip">Award-winning web agency</span>
+                        </td>
+                        <td>Remote</td>
+                        <td>Full-time</td>
+                    </tr>
+
+                    <tr>
+                        <td>Database Analyst</td>
+                        <td>InfoMedia</td>
+                        <td>Remote</td>
+                        <td>Full-time</td>
+                    </tr>
+                    <tr>
+                        <td>Data Analyst Intern</td>
+                        <td>DataDive</td>
+                        <td>On-site</td>
+                        <td>Internship</td>
+                    </tr>
+                    <tr>
+                        <td>Backend Engineer</td>
+                        <td>CodeNest</td>
+                        <td>Remote</td>
+                        <td>Contract</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 TechHire. All rights reserved.</p>
+    </div>
+
+</body>
+</html>

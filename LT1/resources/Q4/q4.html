@@ -1,0 +1,42 @@
+<!-- DO NOT EDIT THIS HTML FILE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Question 4 - Study Room Requests</title>
+    <!-- Axios -->
+    <script src="axios.min.js"></script>
+</head>
+<body>
+
+    <!-- DO NOT EDIT THIS HTML FILE -->
+    
+    <h1>Study Room Requests</h1>
+
+    <div>
+        <label for="nameInput">Your name:</label>
+        <input id="nameInput" type="text">
+
+        <label for="slotSelect">Select a slot:</label>
+        <select id="slotSelect"></select>
+
+        <button id="createBtn" onclick="createRequest()">Create</button>
+    </div>
+    
+    <table border="1" cellpadding="6" cellspacing="0" style="margin-top: 12px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Slot</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyRequests">
+        </tbody>
+    </table>
+
+    <script src="q4.js"></script>
+</body>
+</html>

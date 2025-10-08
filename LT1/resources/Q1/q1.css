@@ -1,0 +1,63 @@
+/*
+  Name: Lim Jie Ching
+  Email: jc.lim.2024
+*/
+
+/* Part A */
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #004d40;
+}
+
+.header-text {
+  color: white;
+  padding: 20px;
+}
+
+.header img {
+  width: 100px;
+}
+
+/* Part B */
+.filter-form,
+.job-listings {
+  border-radius: 8px;
+  height: 100%;
+}
+
+.main {
+  display: inline-flex;
+}
+
+.filter-form {
+  margin-right: 20px;
+}
+
+.job-listings {
+  margin-left: 20px;
+}
+
+/* Part C */
+.filter-form form label {
+  width: 30%;
+  align-self: start;
+}
+
+.filter-form input[type="text"],
+.filter-form select {
+  width: 70%;
+  align-self: end;
+}
+
+/* Part D: Add an adequate selector here */
+tr:nth-child(even){background-color: #f1f1f1;}
+
+/* Part E */
+.badge {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+
