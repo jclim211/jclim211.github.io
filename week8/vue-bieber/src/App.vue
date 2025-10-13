@@ -1,47 +1,37 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      //simple values we will show on screen
+      artist: 'Justin Bieber',
+      tagline: "Belieber friendly demo",
+      isSuperfan: false,
+      belieberEnergy: 20,
+    };
+  }
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
+  <main class="container">
+    <h1 class="title">
+      Simple Data Binding - Justin Bieber
+    </h1>
+    <p>Hello {{ artist }}</p>
+    <p>{{ tagline }}</p>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.container{
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.title{
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
 }
 </style>
