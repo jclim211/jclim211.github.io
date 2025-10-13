@@ -20,6 +20,8 @@ export default {
     </h1>
     <p>Hello {{ artist }}</p>
     <p>{{ tagline }}</p>
+    <p>Shoutout: {{ artist + "!" }}</p>
+    <p>Uppercase: {{ artist.toUpperCase() }}</p>
   </main>
 </template>
 
