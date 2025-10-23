@@ -8,6 +8,8 @@ export default {
       tagline: "Belieber friendly demo",
       isSuperfan: false,
       belieberEnergy: 20,
+      webUrl: "https://en.wikipedia.org/wiki/Justin_Bieber",
+      webUrlText: "Justin Bieber - Wikipedia",
     };
   }
 };
@@ -22,6 +24,22 @@ export default {
     <p>{{ tagline }}</p>
     <p>Shoutout: {{ artist + "!" }}</p>
     <p>Uppercase: {{ artist.toUpperCase() }}</p>
+
+    <hr>
+
+    <p>
+      Web address (url):
+      <input type="url" v-model="webUrl">
+    </p>
+
+    <p>
+      Link text:
+      <input type="text" v-model="webUrlText">
+    </p>
+
+    <p>
+      <a v-bind:href="webUrl" target="_blank">{{webUrlText}}</a>
+    </p>
   </main>
 </template>
 
