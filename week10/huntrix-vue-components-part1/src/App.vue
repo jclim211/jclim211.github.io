@@ -1,51 +1,77 @@
 <script>
+import HeaderBar from "./components/HeaderBar.vue";
+import FooterBar from "./components/FooterBar.vue";
+import MemberCard from "./components/MemberCard.vue";
+
 export default {
-  name: 'App',
+  name: "App",
+  components: { HeaderBar, FooterBar, MemberCard },
   data() {
     return {
-      group: 'HUNTRIX',
+      group: "HUNTRIX",
       members: [
         {
           id: 1,
-          name: 'Rumi',
-          role: 'Leader, Vocal',
-          img: '/photos/rumi.jpg'
+          name: "Rumi",
+          role: "Leader, Vocal",
+          img: "/photos/rumi.jpg",
+          city: "Dubai",
         },
         {
           id: 2,
-          name: 'Mira',
-          role: 'Rapper',
-          img: '/photos/mira.jpg'
+          name: "Mira",
+          role: "Rapper",
+          img: "/photos/mira.jpg",
+          city: "Los Angeles",
         },
         {
           id: 3,
-          name: 'Zoey',
-          role: 'Dancer',
-          img: '/photos/zoey.jpg'
-        }
-      ]
-    }
-  }
-}
+          name: "Zoey",
+          role: "Dancer",
+          img: "/photos/zoey.jpg",
+          city: "Moscow",
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <template>
   <div id="app">
-
     <!-- Header Bar goes here -->
-    <h1>{{ group }}</h1>
+    <HeaderBar />
 
     <div class="main">
       <!-- Member Cards go here -->
-       <div v-for="m in members">
-          <h2>{{ m.name }}</h2>
-          <p>{{ m.role }}</p>
-          <img :src="m.img" width="100">
-       </div>
+      <MemberCard
+        v-for="m in members"
+        :key="m.id"
+        :name="m.name"
+        :role="m.role"
+        :img="m.img"
+        :city="m.city"
+      >
+        <!-- This appears inside MemberCard’s slot -->
+        <p style="font-size: 0.9rem; color: #555">
+          ✨ {{ m.name }} is shining bright today!
+        </p>
+
+        <!-- Named footer slot -->
+        <template #footer>
+          <!-- You can put any HTML/components here -->
+          <div>
+            <span title="Top Performer">🏆</span>
+            <span title="Stage Ready">🎶</span>
+            <small style="display: block; color: #555; margin-top: 4px">
+              Fan badges updated today
+            </small>
+          </div>
+        </template>
+      </MemberCard>
     </div>
     <!-- Footer -->
-
-    
+    <FooterBar />
   </div>
 </template>
 
